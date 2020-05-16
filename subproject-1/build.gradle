@@ -1,0 +1,5 @@
+plugins {
+    id "com.sidneysimmons.gradle-plugin-external-properties"
+}
+
+println props.get("my.prop")
