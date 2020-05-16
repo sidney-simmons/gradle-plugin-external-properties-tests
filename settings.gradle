@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        maven {
+            url "C:/Users/sassi/git/gradle-plugin-external-properties/build/test-maven-repo"
+        }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "gradle-plugin-external-properties-tests"
+include "subproject-1"
+include "subproject-2"
