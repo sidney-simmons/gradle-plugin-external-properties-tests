@@ -2,4 +2,4 @@ plugins {
     id "com.sidneysimmons.gradle-plugin-external-properties"
 }
 
-println props.get("my.prop")
+println props.get("my.prop.not.found", "I'm a default because the property wasn't found.")
