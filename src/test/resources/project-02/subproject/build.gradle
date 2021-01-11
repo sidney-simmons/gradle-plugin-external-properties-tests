@@ -1,0 +1,38 @@
+plugins {
+    id "com.sidneysimmons.gradle-plugin-external-properties"
+}
+
+// Exists in all (home root, home subproject, root, and subproject)
+task getProperty01() {
+    doLast {
+        println props.get("property.01")
+    }
+}
+
+// Exists in home root and home subproject
+task getProperty02() {
+    doLast {
+        println props.get("property.02")
+    }
+}
+
+// Exists in root and subproject
+task getProperty03() {
+    doLast {
+        println props.get("property.03")
+    }
+}
+
+// Exists in root
+task getProperty04() {
+    doLast {
+        println props.get("property.04")
+    }
+}
+
+// Exists in subproject
+task getProperty05() {
+    doLast {
+        println props.get("property.05")
+    }
+}

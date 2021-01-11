@@ -1,31 +1,23 @@
 # gradle-plugin-external-properties-tests
 
-gradle-plugin-external-properties-tests is a multi-project gradle project meant for testing the [gradle-plugin-external-properties](https://github.com/sidney-simmons/gradle-plugin-external-properties) plugin.
+gradle-plugin-external-properties-tests is a gradle project meant for unit testing the [gradle-plugin-external-properties](https://github.com/sidney-simmons/gradle-plugin-external-properties) plugin against multiple versions of gradle.
 
-## Usage
+## Testing the Plugin
 
-Clone the plugin repository and execute `./gradlew build`.  Then execute `./gradlew publish`.  This will publish the plugin to a local maven repository directory `[PLUGIN PROJECT ROOT]/build/test-maven-repo`.  Now you can use the local plugin in this project by setting the following in this project's build files.
+1. Clone the `gradle-plugin-external-properties` plugin repository mentioned above and execute `./gradlew build` (just to make sure it builds!).
+2. Clone this repository and execute `./gradlew testAgainstAllGradleVersions` to run all the tests against all the configured gradle versions. Gradle's "composite builds" feature will replace the dependency in the unit test projects with the locally built artifact from the `gradle-plugin-external-properties` project.
 
-> build.gradle
+## Publishing the Plugin
 
-``` gradle
-plugins {
-    id 'com.sidneysimmons.gradle-plugin-external-properties' version '[PLUGIN VERSION]'
-}
+1. Increment the "version" within build.gradle.
+
+2. Run the following to publish.
+
+```
+./gradlew -Dgradle.publish.key=${PUBLISH_KEY} -Dgradle.publish.secret=${PUBLISH_SECRET} publishPlugins
 ```
 
-> settings.gradle
-
-``` gradle
-pluginManagement {
-    repositories {
-        maven {
-            url '[PLUGIN PROJECT ROOT]/build/test-maven-repo'
-        }
-        gradlePluginPortal()
-    }
-}
-```
+3. Add a new release to the GitHub releases.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
