@@ -1,0 +1,57 @@
+plugins {
+    id "com.sidneysimmons.gradle-plugin-external-properties" version "1.0.1"
+}
+
+// Exists in all files (file 1, file 2, and file 3)
+task getProperty01() {
+    doLast {
+        println props.get("property.01")
+    }
+}
+
+// Exists in file 2 and file 3
+task getProperty02() {
+    doLast {
+        println props.get("property.02")
+    }
+}
+
+// Exists in file 3
+task getProperty03() {
+    doLast {
+        println props.get("property.03")
+    }
+}
+
+// Doesn't exist in any files
+task getProperty04() {
+    doLast {
+        println props.exists("property.04")
+    }
+}
+
+// Only available through the custom resolver
+task getProperty05() {
+    doLast {
+        println props.get("property.05")
+    }
+}
+
+// Create a custom resolver for use in the property 05 task
+import com.sidneysimmons.gradlepluginexternalproperties.resolver.PropertyResolver;
+public class MyCustomResolver implements PropertyResolver {
+    public String resolve(String propertyName) {
+        if (propertyName.equals("property.05")) {
+            return "You found me.";
+        }
+        return null;
+    }
+    public Properties getProperties() {return null;}
+}
+
+externalProperties {
+    propertiesFileResolver file("custom-resolver-01.properties")
+    propertiesFileResolver file("custom-resolver-02.properties")
+    propertiesFileResolver file("custom-resolver-03.properties")
+    resolver new MyCustomResolver()
+}
