@@ -108,8 +108,9 @@ tasks.withType(Test) {
     // Make sure the tests run every time even if nothing has changed
     outputs.upToDateWhen { false }
     
-    // Tell gradle to log which tests pass and fail as the test are running
+    // Tell gradle to log which tests pass and fail as the test are running and enable standard out and error streams
     testLogging.events = ["passed", "failed"]
+    testLogging.showStandardStreams = true
     
     // Set our actual user home so the test projects can find the local plugin version - this is because
     // the "user.home" property is overridden during the tests to point to a directory within the temporary
