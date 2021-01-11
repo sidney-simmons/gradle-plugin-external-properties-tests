@@ -7,6 +7,8 @@ gradle-plugin-external-properties-tests is a gradle project meant for unit testi
 1. Clone the `gradle-plugin-external-properties` plugin repository mentioned above and execute `./gradlew build` (just to make sure it builds!).
 2. Clone this repository and execute `./gradlew testAgainstAllGradleVersions` to run all the tests against all the configured gradle versions. Gradle's "composite builds" feature will replace the dependency in the unit test projects with the locally built artifact from the `gradle-plugin-external-properties` project.
 
+![Testing screenshot!](documentation/screenshot.png)
+
 ## Publishing the Plugin
 
 1. Increment the "version" within build.gradle.
