@@ -1,5 +1,118 @@
 plugins {
-    id "com.sidneysimmons.gradle-plugin-external-properties" version "1.0.1"
+    id "java"
 }
 
-println props.get("my.prop")
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    // Lombok
+    testCompileOnly "org.projectlombok:lombok:1.18.16"
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.16"
+    
+    testImplementation gradleTestKit()
+    testImplementation "junit:junit:4.13"
+    testImplementation "org.mockito:mockito-core:3.0.0"
+    testImplementation "commons-io:commons-io:2.8.0"
+}
+
+task testAgainstAllGradleVersions() {
+    dependsOn "testAgainstGradle01"
+    dependsOn "testAgainstGradle02"
+    dependsOn "testAgainstGradle03"
+    dependsOn "testAgainstGradle04"
+    dependsOn "testAgainstGradle05"
+    dependsOn "testAgainstGradle06"
+    dependsOn "testAgainstGradle07"
+    dependsOn "testAgainstGradle08"
+    dependsOn "testAgainstGradle09"
+    dependsOn "testAgainstGradle10"
+}
+
+task testAgainstGradle01(type: Test) {
+    systemProperty "gradle.version", "6.3"
+    doFirst {
+        println "--- Testing against gradle 6.3 ---"
+    }
+}
+
+task testAgainstGradle02(type: Test) {
+    systemProperty "gradle.version", "6.4"
+    doFirst {
+        println "--- Testing against gradle 6.4 ---"
+    }
+}
+
+task testAgainstGradle03(type: Test) {
+    systemProperty "gradle.version", "6.4.1"
+    doFirst {
+        println "--- Testing against gradle 6.4.1 ---"
+    }
+}
+
+task testAgainstGradle04(type: Test) {
+    systemProperty "gradle.version", "6.5"
+    doFirst {
+        println "--- Testing against gradle 6.5 ---"
+    }
+}
+
+task testAgainstGradle05(type: Test) {
+    systemProperty "gradle.version", "6.5.1"
+    doFirst {
+        println "--- Testing against gradle 6.5.1 ---"
+    }
+}
+
+task testAgainstGradle06(type: Test) {
+    systemProperty "gradle.version", "6.6"
+    doFirst {
+        println "--- Testing against gradle 6.6 ---"
+    }
+}
+
+task testAgainstGradle07(type: Test) {
+    systemProperty "gradle.version", "6.6.1"
+    doFirst {
+        println "--- Testing against gradle 6.6.1 ---"
+    }
+}
+
+task testAgainstGradle08(type: Test) {
+    systemProperty "gradle.version", "6.7"
+    doFirst {
+        println "--- Testing against gradle 6.7 ---"
+    }
+}
+
+task testAgainstGradle09(type: Test) {
+    systemProperty "gradle.version", "6.7.1"
+    doFirst {
+        println "--- Testing against gradle 6.7.1 ---"
+    }
+}
+
+task testAgainstGradle10(type: Test) {
+    systemProperty "gradle.version", "6.8"
+    doFirst {
+        println "--- Testing against gradle 6.8 ---"
+    }
+}
+
+// Configure common settings for all the test tasks
+tasks.withType(Test) {
+    // Make sure the tests run every time even if nothing has changed
+    outputs.upToDateWhen { false }
+    
+    // Tell gradle to log which tests pass and fail as the test are running
+    testLogging.events = ["passed", "failed"]
+    
+    // Set our actual user home so the test projects can find the local plugin version - this is because
+    // the "user.home" property is overridden during the tests to point to a directory within the temporary
+    // project space.
+    systemProperty "user.actual.home", System.getProperty("user.home")
+}

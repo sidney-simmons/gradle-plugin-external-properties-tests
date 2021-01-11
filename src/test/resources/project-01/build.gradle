@@ -1,0 +1,49 @@
+plugins {
+    id "com.sidneysimmons.gradle-plugin-external-properties" version "1.0.1"
+}
+
+// Property exists
+task propertyGetTrue() {
+    doLast {
+        println props.get("this.property.exists")
+    }
+}
+
+// Property doesn't exist (exception should be thrown)
+task propertyGetFalse() {
+    doLast {
+        try {
+            props.get("this.property.does.not.exist")
+        } catch (Exception e) {
+            println "Exception was thrown."
+        }
+    }
+}
+
+// Property exists so the default shouldn't be returned
+task propertyDefaultExistsTrue() {
+    doLast {
+        println props.get("this.property.exists", "This is a default value.")
+    }
+}
+
+// Property doesn't exist so the default should be returned
+task propertyDefaultExistsFalse() {
+    doLast {
+        println props.get("this.property.does.not.exist", "This is a default value.")
+    }
+}
+
+// Property exists so this should return true
+task propertyExistsTrue() {
+    doLast {
+        println props.exists("this.property.exists")
+    }
+}
+
+// Property doesn't exist so this should return false
+task propertyExistsFalse() {
+    doLast {
+        println props.exists("this.property.does.not.exist")
+    }
+}
