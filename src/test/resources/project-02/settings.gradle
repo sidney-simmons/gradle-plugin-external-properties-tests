@@ -1,0 +1,3 @@
+rootProject.name = "project-02"
+include "subproject"
+includeBuild System.getProperty("user.actual.home") + "/git/gradle-plugin-external-properties"
