@@ -53,4 +53,13 @@ public class Project04 {
         assertTrue(result.getOutput().contains("false"));
     }
 
+    /**
+     * Test that the task to show the property resolvers works.
+     */
+    @Test
+    public void showPropertyResolvers() {
+        GradleRunner.create().withGradleVersion(TestUtil.getGradleVersion()).withProjectDir(projectDirectory.getRoot()).withArguments("showPropertyResolvers")
+                .build();
+    }
+
 }

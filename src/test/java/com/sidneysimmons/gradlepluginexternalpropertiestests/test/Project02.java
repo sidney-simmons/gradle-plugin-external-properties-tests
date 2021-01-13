@@ -106,4 +106,13 @@ public class Project02 {
         assertTrue(subprojectResult.getOutput().contains("I'm in the subproject project."));
     }
 
+    /**
+     * Test that the task to show the property resolvers works.
+     */
+    @Test
+    public void showPropertyResolvers() {
+        GradleRunner.create().withGradleVersion(TestUtil.getGradleVersion()).withProjectDir(projectDirectory.getRoot()).withArguments("showPropertyResolvers")
+                .build();
+    }
+
 }
