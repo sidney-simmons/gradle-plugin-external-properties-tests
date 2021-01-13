@@ -1,0 +1,17 @@
+plugins {
+    id "com.sidneysimmons.gradle-plugin-external-properties" version "1.0.1"
+}
+
+// Exists only in this subproject - the root project doesn't apply the plugin at all
+task getProperty01() {
+    doLast {
+        println props.get("property.01")
+    }
+}
+
+// Exists nowhere
+task getProperty02() {
+    doLast {
+        println props.exists("property.02")
+    }
+}
