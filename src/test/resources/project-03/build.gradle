@@ -40,13 +40,13 @@ task getProperty05() {
 // Create a custom resolver for use in the property 05 task
 import com.sidneysimmons.gradlepluginexternalproperties.resolver.PropertyResolver;
 public class MyCustomResolver implements PropertyResolver {
+    @Override
     public String resolve(String propertyName) {
         if (propertyName.equals("property.05")) {
             return "You found me.";
         }
         return null;
     }
-    public Properties getProperties() {return null;}
 }
 
 externalProperties {
